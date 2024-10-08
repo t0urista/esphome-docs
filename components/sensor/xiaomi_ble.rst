@@ -547,7 +547,53 @@ Configuration example:
       - platform: xiaomi_rtcgq02lm
         id: motion_one
         battery_level:
-          name: "Mi Motion Sensor Battery Level"
+          name: "Mi Motion Sensor Battery Level" 
+
+JTYJGD03MI - BLE Smoke Sensor
+******************************
+Xiaomi Smoke Detector Honeywell Sensor. Fire Alarm Audible & Visual Alarm Work With Bluetooth-compatible Gateway Smart Remote APP
+
+IMPORTANT : 
++ Only the Bluetooth (BLE) version is supported, the ZigBee version is not
++ needs to be registered on the Chinese Xiaomi portal. It is indeed intented to the Asian market and is not avaialble on other Xiaomi Eureopean or American  registration Portals
++ BLE is encrypted, so you need to retrieve the BINDKey from Xiaomi portal.
+
+.. figure:: images/JTYJGD03MI.png
+    :align: center
+    :width: 30.0%
+
+Configuration example:
+
+.. code-block:: yaml
+
+xiaomi_jtyjgd03mi:
+  - id: smoke_one
+    mac_address: 18:C2:3C:31:77:7B
+    bindkey: 520d1864d53ce8010101010101010101  
+
+binary_sensor:
+
+  - platform: xiaomi_jtyjgd03mi
+    id: smoke_one
+    button:
+      name:  "smoke button"
+      id: button_smoke
+    smoke:
+      name: "smoke_detection"
+      id: detection_smoke
+
+sensor:
+    
+  - platform: ble_rssi
+    mac_address: 18:C2:3C:31:77:7B
+    name: "smoke rssi"
+   
+  - platform: xiaomi_jtyjgd03mi
+    id: smoke_one
+    battery_level:
+      name: "smoke battery" 
+      unit_of_measurement: "%"      
+      accuracy_decimals: 0  
 
 
 
